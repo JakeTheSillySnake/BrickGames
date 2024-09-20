@@ -23,17 +23,19 @@ Correct compilation and running of the program depends on other utilities and li
 | Leaks Check | valgrind |
 | Convert Manual to DVI | texi2dvi |
 
+Importantly, the games have music tracks, which can't be uploaded here due to the file size constraints. For a complete experience, download both tracks <a href="https://jmp.sh/Pg5nMh6t" target="-blank">here</a> and proceed to __Setup__.
+
 </br>
 
 ### Setup
 
-Download or clone (`git clone <link_to_repo>`) the source repository to where you can easily find it. Then type and run the following commands in the terminal: 
+Download or clone (`git clone <link_to_BrickGames>`) the source repository to where you can easily find it. Put the music files, if you've installed them, into the `BrickGames/src/brick_game/assets` folder. Then type and run the following commands in the terminal: 
 
-1. `cd <path-to-games-folder>/src`
+1. `cd <path-to-BrickGamesr>/src`
 
 2. `make install`
 
-Now the program is compiled, placing all necessary files in a single folder named games/. To start either game, run: 
+Now the program is compiled, placing all necessary files in a single folder named `BrickGames/src/games/`. To start either game, run: 
 
 1. For Command Line Interafce: `make tetris_cli` OR `make snake_cli`
 
