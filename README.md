@@ -31,7 +31,7 @@ Importantly, the games have music tracks, which can't be uploaded here due to th
 
 Download or clone (`git clone <link_to_BrickGames>`) the source repository to where you can easily find it. Put the music files, if you've installed them, into the `BrickGames/src/brick_game/assets` folder. Then type and run the following commands in the terminal: 
 
-1. `cd <path-to-BrickGamesr>/src`
+1. `cd <path-to-BrickGames>/src`
 
 2. `make install`
 
