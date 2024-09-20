@@ -23,8 +23,6 @@ Correct compilation and running of the program depends on other utilities and li
 | Leaks Check | valgrind |
 | Convert Manual to DVI | texi2dvi |
 
-Importantly, the games have music tracks, which can't be uploaded here due to the file size constraints. For a complete experience, download both tracks <a href="https://jmp.sh/Pg5nMh6t" target="-blank">here</a> and proceed to __Setup__.
-
 </br>
 
 ### Setup
