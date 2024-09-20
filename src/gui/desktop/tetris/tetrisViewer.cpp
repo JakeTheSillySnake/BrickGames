@@ -37,7 +37,7 @@ void MainWindow::slotTimerAlarm() {
 void MainWindow::play_sound() {
   player->setPlaylist(playlist);
   playlist->addMedia(QUrl::fromLocalFile(
-      QFileInfo("assets/tetris_track.wav").absoluteFilePath()));
+      QFileInfo("assets/tetris_track.mp3").absoluteFilePath()));
   playlist->setPlaybackMode(QMediaPlaylist::CurrentItemInLoop);
   player->setVolume(30);
   player->play();
