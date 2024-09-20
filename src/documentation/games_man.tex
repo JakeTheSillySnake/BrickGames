@@ -1,0 +1,177 @@
+%% LyX 2.3.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{babel}
+
+
+
+
+
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+\title{\texttt{\textbf{Brick Games Manual}}}
+\author{by JakeTheSillySnake (@ginzburg\_jake on Telegram)}
+\date{Last updated September 2024}
+
+\maketitle
+\tableofcontents{}
+
+\section{Introduction}
+
+This document describes how to install, run, check and remove Snake
+and Tetris on Linux and Unix-like systems. Please note that the program
+was written and tested on Ubuntu 22.04 LTS, so its behaviour may differ
+if you use other versions or OS distributions.
+
+\section{Installation \& Running}
+
+\subsection{Prerequisites}
+
+Correct compilation and running of the program depends on other utilities
+and libraries. Check that you have their latest versions before proceeding: 
+\begin{description}
+\item [{Basics,~Command~Line~Interface}] gcc, make 
+\item [{Desktop~Interface}] Qt library, qmake
+\item [{Testing}] GTest library 
+\item [{GCOV~Report}] gcov, lcov 
+\item [{Leaks~Check}] valgrind 
+\item [{Convert~Manual~to~DVI}] texi2dvi 
+\end{description}
+
+\subsection{Setup}
+
+Download or clone (\texttt{git clone <link\_to\_repo>}) the source
+repository to where you can easily find it. Then type and run the
+following commands in the terminal: 
+\begin{enumerate}
+\item \texttt{cd <path-to-games-folder>/src} 
+\item \texttt{make install} 
+\end{enumerate}
+Now the program is compiled, placing all necessary files in a single
+folder named \texttt{games/}. To start either game, run: 
+\begin{enumerate}
+\item For Command Line Interafce:\texttt{ make tetris\_cli OR make snake\_cli} 
+\item For Desktop Interface:\texttt{ make tetris\_desk OR make snake\_desk} 
+\end{enumerate}
+If there are errors, you're likely missing some packages. Check \textbf{Prerequisites}.
+
+\subsection{How to play}
+
+This program is a reimagining of classic Tetris and Snake. In \textbf{Tetris},
+your task is to make horizontal lines from randomly generated falling
+pieces. Each completed line earns you points, insreasing the level
+of difficulty and speed. You lose once the pieces reach the upper
+border. Pay attention to the following controls: 
+\begin{description}
+\item [{%
+\begin{tabular}{|c|c|c|}
+\hline 
+\textbf{Action} & \textbf{CLI key} & \textbf{Desktop key}\tabularnewline
+\hline 
+\hline 
+\textbf{(Re)start} & S & X\tabularnewline
+\hline 
+\textbf{Pause} & Space & Space\tabularnewline
+\hline 
+\textbf{Quit} & Q & Exit button\tabularnewline
+\hline 
+\textbf{Left} & Left Arrow & A\tabularnewline
+\hline 
+\textbf{Right} & Right Arrow & D\tabularnewline
+\hline 
+\textbf{Down} & Down Arrow & S\tabularnewline
+\hline 
+\textbf{Rotate} & Enter & W\tabularnewline
+\hline 
+\end{tabular}}]~
+\end{description}
+In \textbf{Snake}, you control a ``snake'' that moves around a field.
+Collecting ``apples'' that appear on the field earns you points,
+increasing the snake's length and speed. You lose if the snake crashes
+into the walls or itself. 
+\begin{description}
+\item [{%
+\begin{tabular}{|c|c|c|}
+\hline 
+\textbf{Action} & \textbf{CLI key} & \textbf{Desktop key}\tabularnewline
+\hline 
+\hline 
+\textbf{(Re)start} & S & X\tabularnewline
+\hline 
+\textbf{Pause} & Space & Space\tabularnewline
+\hline 
+\textbf{Quit} & Q & Exit button\tabularnewline
+\hline 
+\textbf{Left} & Left Arrow & A\tabularnewline
+\hline 
+\textbf{Right} & Right Arrow & D\tabularnewline
+\hline 
+\textbf{Down} & Down Arrow & S\tabularnewline
+\hline 
+\textbf{Up} & Up Arrow & W\tabularnewline
+\hline 
+\end{tabular}}]~
+\end{description}
+
+\section{Game structure \& testing}
+
+The games stick to the C++17 language and standard libraries, with
+the desktop interface provided by the Qt5. Both use a finite state
+machine (FSM) to manage the game's state. The source code can be found
+in \texttt{brick\_game/tetris} and \texttt{brick\_game/snake}. It
+controls switching between the states: 
+\begin{description}
+\item [{Start}] beginning of the game 
+\item [{Spawn}] generation of a new tetris piece/apple 
+\item [{Shifting}] tetris piece shifts downs/snake moves forward after
+a set time period 
+\item [{Moving}] tetris piece/snake responds to the user's actions 
+\item [{Colliding}] tetris piece reaches the bottom or lands on another
+piece/snake collides with itself or walls 
+\item [{Pause}] the game stops updating the field 
+\item [{Gameover}] the game ends when tetris pieces reach the top/snake
+collides with itself or walls 
+\item [{Exit}] termination of the game 
+\end{description}
+The games close if the files storing the high scores can't be accessed.
+FSM continuously returns updated game field and stats depending on
+the user's action.
+
+Additionally, Snake uses a VCM model, where the source code is divided
+between the model, controller and viewer classes. The model contains
+all the relevant information about the game, the controller accepts
+the user actions and passes them to the model, and the viewer displays
+the current model and processes the user input.
+
+The backend libraries can be tested with GTest: 
+\begin{enumerate}
+\item To run tests:\texttt{ make test\_snake} \texttt{OR make test\_tetris} 
+\item To display test coverage:\texttt{ make report\_snake OR make report\_tetris} 
+\item To check for leaks: \texttt{make valgrind } 
+\end{enumerate}
+Running \texttt{make} or \texttt{make all} will reinstall and compile
+the program. You can get DVI documentation with \texttt{make dvi}
+or a distribution .tar.gz package with \texttt{make dist}.
+
+\section{Deinstallation}
+
+Simply run \texttt{make uninstall }or\texttt{ make clean. }This will
+remove the \texttt{games/} directory but not the original download,
+which can be safely deleted afterwards.
+
+\subparagraph{If you wish to suggest an improvement or report a bug, contact me
+@ginzburg\_jake (Telegram) or JakeTheSillySnake (GitHub).}
+\end{document}
