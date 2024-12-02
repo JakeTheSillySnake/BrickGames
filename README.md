@@ -17,7 +17,7 @@ Correct compilation and running of the program depends on other utilities and li
 | Compilation targets | Utilities |
 | ------------------- | --------- |
 | Basics, Command Line Interface | gcc, make |
-| Desktop Interface | Qt library, qmake |
+| Desktop Interface | Qt5, qmake |
 | Testing | GTest library |
 | GCOV Report | gcov, lcov |
 | Leaks Check | valgrind |
@@ -29,7 +29,7 @@ Correct compilation and running of the program depends on other utilities and li
 
 Download or clone (`git clone <link_to_BrickGames>`) the source repository to where you can easily find it. Put the music files, if you've installed them, into the `BrickGames/src/brick_game/assets` folder. Then type and run the following commands in the terminal: 
 
-1. `cd <path-to-BrickGames>/src`
+1. `cd <path_to_BrickGames>/src`
 
 2. `make install`
 
@@ -88,7 +88,7 @@ The games stick to the C++17 language and standard libraries, with the desktop i
 
 The games close if the files storing the high scores can't be accessed. FSM continuously returns updated game field and stats depending on the user's action.
 
-Additionally, Snake uses a VCM model, where the source code is divided between the model, controller and viewer classes. The model contains all the relevant information about the game, the controller accepts the user actions and passes them to the model, and the viewer displays the current model and processes the user input.
+Additionally, Snake uses a MVC model, where the source code is divided between the model, controller and viewer classes. The model contains all the relevant information about the game, the controller accepts the user actions and passes them to the model, and the viewer displays the current model and processes the user input.
 
 The backend libraries can be tested with GTest: 
 
