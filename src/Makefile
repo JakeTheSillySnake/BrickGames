@@ -13,8 +13,6 @@ TETRIS_DESK = gui/desktop/tetris
 SNAKE_BACK = brick_game/snake
 TETRIS_BACK = brick_game/tetris
 
-
-
 all: clean install test gcov_report
 
 snake_cli:
@@ -74,12 +72,14 @@ assets:
 	cp -R brick_game/assets .
 
 install:
-	mkdir $(PROJECT_DIR)
+	mkdir $(PROJECT_DIR) $(PROJECT_DIR)/build_snake $(PROJECT_DIR)/build_tetris
 	cp -R brick_game/assets $(PROJECT_DIR)
 	$(CC) $(SNAKE_BACK)/*.cpp $(SNAKE_CLI)/*.cpp $(LIBS) -o $(PROJECT_DIR)/snake_cli
 	$(CC) $(TETRIS_BACK)/*.cpp $(TETRIS_CLI)/*.cpp $(LIBS) -o $(PROJECT_DIR)/tetris_cli
-	cd $(SNAKE_DESK); make snake
-	cd $(TETRIS_DESK); make tetris
+	qmake $(SNAKE_DESK)/snake.pro -o $(PROJECT_DIR)/build_snake/Makefile
+	qmake $(TETRIS_DESK)/tetris.pro -o $(PROJECT_DIR)/build_tetris/Makefile
+	cd $(PROJECT_DIR)/build_snake; make snake && mv snake ../snake_desk && make clean
+	cd $(PROJECT_DIR)/build_tetris; make tetris && mv tetris ../tetris_desk && make clean
 	@echo "\nGames installed successfully.\n"
 
 uninstall:
@@ -99,7 +99,7 @@ dist:
 	rm -rf $(DIST_DIR)
 	@echo "\nDistribution directory 'games_2.0' ready.\n"
 
-rebuild: clean all
+rebuild: clean uninstall all
 
 clean: clean_assets
 	rm -f *.o *.a *.gcno *.gcda *.info *.out *.gcov *.gch

@@ -17,7 +17,7 @@ Correct compilation and running of the program depends on other utilities and li
 | Compilation targets | Utilities |
 | ------------------- | --------- |
 | Basics, Command Line Interface | gcc, make |
-| Desktop Interface | Qt5, qmake |
+| Desktop Interface | Qt5 (with Qt Multimedia), qmake |
 | Testing | GTest library |
 | GCOV Report | gcov, lcov |
 | Leaks Check | valgrind |
@@ -39,7 +39,7 @@ Now the program is compiled, placing all necessary files in a single folder name
 
 2. For Desktop Interface: `make tetris_desk` OR `make snake_desk`
 
-If there are errors, you're likely missing some packages. Check __Prerequisites__.
+If there are errors, you're likely missing some packages. Make sure you have Qt Multimedia installed and check __Prerequisites__.
 
 </br>
 

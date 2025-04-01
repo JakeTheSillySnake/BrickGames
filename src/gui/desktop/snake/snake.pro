@@ -11,7 +11,7 @@ CONFIG += c++17
 SOURCES += \
     snake.cpp \
     snakeViewer.cpp \
-    ../../../brick_game/snake/*.cpp
+    ../../brick_game/snake/*.cpp
 
 HEADERS += \
     snakeViewer.h

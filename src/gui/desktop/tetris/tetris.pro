@@ -11,7 +11,7 @@ CONFIG += c++17
 SOURCES += \
     tetris.cpp \
     tetrisViewer.cpp \
-    ../../../brick_game/tetris/*.cpp
+    ../../brick_game/tetris/*.cpp
 
 HEADERS += \
     tetrisViewer.h
